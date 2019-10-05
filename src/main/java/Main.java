@@ -17,12 +17,12 @@ public class Main {
 
     public static void main(String[] args){
         String ref = "School";
-        int mutatedIndex;
+        int genomLength, mutatedIndex;
         char genToMutate, mutatedGen;
         String previousGenom, nextGenom = null;
 
         Creature initPopulation = new Creature();
-        int genomLength = initPopulation.genom.length();
+        genomLength = initPopulation.genom.length();
 
         System.out.println("------------");
         System.out.println("Initial population: " + initPopulation.genom);
