@@ -3,7 +3,7 @@ import org.apache.commons.lang3.RandomUtils;
 
 public class Main {
 
-    public static int getMutatedIndex(int genomLength) {
+    public static int getMutatedIndex(int genomLength){
         return RandomUtils.nextInt(0, genomLength);
     }
 
@@ -15,14 +15,22 @@ public class Main {
         return previousGenom.substring(0, mutatedIndex) + mutatedGen + previousGenom.substring(mutatedIndex+1);
     }
 
+    public static String doMutation(String previousGenom, int genomLength){
+        int mutatedIndex = getMutatedIndex(genomLength);
+        char genToMutate = previousGenom.charAt(mutatedIndex);
+        char mutatedGen = doMutatedGen(genToMutate);
+
+        System.out.println("Gen to mutate is \'" + genToMutate + "\' at " + mutatedIndex + " position");
+        System.out.println("Mutated gen: \'" + mutatedGen + "\'");
+
+        return doMutateGenom(previousGenom, mutatedIndex, mutatedGen);
+    }
+
     public static void main(String[] args){
-        String ref = "School";
-        int genomLength, mutatedIndex;
-        char genToMutate, mutatedGen;
         String previousGenom, nextGenom = null;
 
         Creature initPopulation = new Creature();
-        genomLength = initPopulation.genom.length();
+        int genomLength = initPopulation.genom.length();
 
         System.out.println("------------");
         System.out.println("Initial population: " + initPopulation.genom);
@@ -31,15 +39,11 @@ public class Main {
 
         previousGenom = initPopulation.genom;
         for (int i = 0; i < 10; i++){
-            mutatedIndex = getMutatedIndex(genomLength);
-            genToMutate = initPopulation.genom.charAt(mutatedIndex);
-            mutatedGen = doMutatedGen(genToMutate);
-            nextGenom = doMutateGenom(previousGenom, mutatedIndex, mutatedGen);
-
             System.out.println("------------");
             System.out.println("Previous genom: " + previousGenom);
-            System.out.println("Gen to mutate is \'" + genToMutate + "\' at " + mutatedIndex + " position");
-            System.out.println("Mutated gen: \'" + mutatedGen + "\'");
+
+            nextGenom = doMutation(previousGenom, genomLength);
+
             System.out.println("Next genom: " + nextGenom);
             System.out.println("------------\n");
 
