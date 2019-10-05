@@ -1,10 +1,13 @@
 import org.apache.commons.lang3.RandomStringUtils;
 
 public class Creature {
-    String genom;
+    private String genom;
 
     public Creature() {
         genom = generateSpecies();
+    }
+    public String getGenom() {
+        return this.genom;
     }
 
     public String generateSpecies() {
