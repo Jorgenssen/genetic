@@ -1,8 +1,9 @@
 public class Offspring {
-    private String genom, preGenom;
+    private String genom;
+    private String preGenom;
 
-    public Offspring(String nextGenom){
-        setGenom(nextGenom);
+    public Offspring(String genom){
+        setGenom(genom);
     }
 
     public String getGenom() {

@@ -3,9 +3,14 @@ import org.slf4j.LoggerFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
+import java.util.concurrent.atomic.AtomicReference;
+import java.util.stream.Stream;
+
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
+
+    private static final int OFFSPRINGS_COUNT = 10;
 
     private static int getMutatedIndex(int genomLength) {
         return RandomUtils.nextInt(0, genomLength);
@@ -32,8 +37,7 @@ public class Main {
 
     public static void main(String[] args) {
         String preGenom, nextGenom;
-        int offspringsCount = 10;
-        Offspring[] offsprings = new Offspring[offspringsCount];
+        Offspring[] offsprings = new Offspring[OFFSPRINGS_COUNT];
 
         Creature initPopulation = new Creature();
         int genomLength = initPopulation.getGenom().length();
@@ -42,12 +46,13 @@ public class Main {
         log.info("------------");
         log.info("Initial population: {}", initPopulation.getGenom());
         log.info("Genom length: {}", genomLength);
-        log.info("Count of offsprings: {}", offspringsCount);
+        log.info("Count of offsprings: {}", OFFSPRINGS_COUNT);
         log.info("------------");
         log.info("Offsprings:");
+        log.info("------------");
 
-        for (int i = 0; i < offspringsCount; i++) {
-            log.info("Population " + i+1);
+        for (int i = 0; i < OFFSPRINGS_COUNT; i++) {
+            log.info("Population {}", i+1);
             nextGenom = doMutation(preGenom, genomLength);
             offsprings[i] = new Offspring(nextGenom);
             offsprings[i].setPreGenom(preGenom);
@@ -55,6 +60,7 @@ public class Main {
             log.info("{} previous genom: {}", offsprings[i], offsprings[i].getPreGenom());
             log.info("{} actual genom: {}", offsprings[i], offsprings[i].getGenom());
             log.info("------------");
+            preGenom = offsprings[i].getGenom();
         }
     }
 }
