@@ -56,7 +56,7 @@ public class Main {
             nextGenom = doMutation(preGenom, genomLength);
             offsprings[i] = new Offspring(nextGenom);
             offsprings[i].setPreGenom(preGenom);
-            log.info("{} initial genom: {}", offsprings[i], initPopulation.getGenom());
+            log.info("{} ancestor genom: {}", offsprings[i], initPopulation.getGenom());
             log.info("{} previous genom: {}", offsprings[i], offsprings[i].getPreGenom());
             log.info("{} actual genom: {}", offsprings[i], offsprings[i].getGenom());
             log.info("------------");
