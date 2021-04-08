@@ -3,9 +3,6 @@ import org.slf4j.LoggerFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.RandomUtils;
 
-import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Stream;
-
 public class Main {
 
     private static final Logger log = LoggerFactory.getLogger(Main.class);
@@ -16,7 +13,7 @@ public class Main {
         return RandomUtils.nextInt(0, genomLength);
     }
 
-    private static char doMutatedGen(char genToMutate) {
+    private static char doMutatedGen() {
         return RandomStringUtils.random(1, true, false).charAt(0);
     }
 
@@ -27,10 +24,10 @@ public class Main {
     private static String doMutation(String previousGenom, int genomLength) {
         int mutatedIndex = getMutatedIndex(genomLength);
         char genToMutate = previousGenom.charAt(mutatedIndex);
-        char mutatedGen = doMutatedGen(genToMutate);
+        char mutatedGen = doMutatedGen();
 
-        log.info("Gen to mutate is \'{}\' at {} position", genToMutate,  mutatedIndex);
-        log.info("Mutated gen: \'{}\'", mutatedGen);
+        log.info("Gen to mutate is '{}' at {} position", genToMutate,  mutatedIndex);
+        log.info("Mutated gen: '{}'", mutatedGen);
 
         return doMutateGenom(previousGenom, mutatedIndex, mutatedGen);
     }
